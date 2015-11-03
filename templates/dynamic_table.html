@@ -1,0 +1,61 @@
+<div>
+  <div class="mask">
+    <div class="loader">
+      <div class="dot dot1"></div>
+      <div class="dot dot2"></div>
+      <div class="dot dot3"></div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div ng-show="pagearray.length > 1" class="form-group pull-right" style="padding-top:7px;">
+      <label for="" class="sr-only">Jump to:</label>
+      <select class="" ng-change="jumpTo()" ng-model="jumpPage">
+        <option ng-repeat="n in pagearray" value="{{n}}">Page {{n}}</option>
+      </select>
+    </div>
+    <form class="form-inline mar-btm">
+      <div class="form-group">
+        <label for="" class="sr-only">Limit</label>
+        <select class="selectpicker" ng-model="limit" ng-change="updateLimitResults()">
+          <option value="5">Limit 5 per page</option>
+          <option value="50">Limit 50 per page</option>
+          <option value="100">Limit 100 per page</option>
+          <option value="200">Limit 200 per page</option>
+          <option value="300">Limit 300 per page</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="query" class="sr-only">Filter</label>
+        <input type="text" placeholder="Filter Results" id="query" class="form-control"  ng-model="filterResults" style="width: 320px;">
+      </div>
+    </form>
+  </div>
+  <ng-include src="tableTmpl"></ng-include>
+
+  <div style="text-align:center">
+    <button class="btn btn-default" ng-click="first()" ng-disabled="viewRange.start == 1">
+      <span ng-hide="loadFirst">First</span>
+      <span ng-show="loadFirst"><i class="fa fa-circle-o-notch fa-spin"></i></span>
+    </button>
+
+      <button class="btn btn-default" ng-click="previous()" ng-disabled="viewRange.start == 1">
+        <span ng-hide="loadPrev"><i class="fa fa-arrow-left"></i></span>
+        <span ng-show="loadPrev"><i class="fa fa-circle-o-notch fa-spin"></i></span>
+      </button>
+
+      <button class="btn btn-default" ng-click="next()" ng-disabled="viewRange.end == total">
+        <span ng-hide="loadNext"><i class="fa fa-arrow-right"></i></span>
+        <span ng-show="loadNext"><i class="fa fa-circle-o-notch fa-spin"></i></span>
+      </button>
+
+      <button class="btn btn-default" ng-click="last()" ng-disabled="viewRange.end == total">
+        <span ng-hide="loadLast">Last</span>
+        <span ng-show="loadLast"><i class="fa fa-circle-o-notch fa-spin"></i></span>
+      </button>
+  </div>
+
+  <div class="text-bold mar-btm" style="text-align:right;">
+    <span class="text-bold">{{viewRange.start}} - {{viewRange.end}} of {{total}}</span>
+  </div>
+</div>
